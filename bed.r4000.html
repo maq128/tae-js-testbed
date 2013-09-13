@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<script type="text/javascript" src="http://a.tbcdn.cn/s/kissy/1.3.0/kissy-min.js"></script>
+<script type="text/javascript" src="http://a.tbcdn.cn/apps/taesite/balcony/core/r4000/??caja/caja-min.js,base/caja-log-min.js,base/caja-util-min.js,base/balcony-min.js,widgets/switchable-min.js?t=20130903"></script>
+</head>
+<body>
+
+<div id="tae-js-testbed-mod" data-componentid="tae_js_testbed" class="J_TModule J_TScriptedModule taeapp">
+
+<script type="text/javascript">
+    //begin -------------------
+    var restrictedAlert = function (s) {
+        alert(String(s));
+    };
+
+    //uz 兼容
+    function getCajaExposed(frameGroup, cajaAFTB) {
+        frameGroup.markFunction(restrictedAlert);
+        var obj = {
+            _taeServer: "http://tpap-docs-1.taegrid.taobao.com",
+            _loginUserNick: "",
+            alert: frameGroup.tame(restrictedAlert),
+            TAECTX: frameGroup.tame({
+                taeServer: "http://tpap-docs-1.taegrid.taobao.com",
+                loginUserNick: "",
+                setLocation: frameGroup.markFunction(function (href) {
+                    var tui = cajaAFTB.rewriteURL(href, null, null, {XML_ATTR: "href"});
+                    if (tui) {
+                        location.href = tui;
+                    }
+                })
+            }),
+            _csrfTokenKey: "_tae_token_",
+            _csrfTokenValue: "31lO6xMxV3L2qzufGZJ2Jg%3D%3D"
+        }
+        return obj;
+    }
+    //end -------------------
+
+    window.cajaConfig = {
+        uri: {
+            white_list: [
+                ".taobao.com"
+                , ".taobao.net"
+                , ".alipay.com"
+                , ".alibaba.com"
+                , ".alimama.com"
+                , ".koubei.com"
+                , ".alisoft.com"
+                , ".taobaocdn.com"
+                , ".taobaocdn.net"
+                , ".tbcdn.cn"
+                , ".tmall.com"
+                , ".hitao.com"],
+            black_list: [
+                "s.click.alimama.com"
+                , "gouwu.alimama.com"
+                , "cam.taoke.alimama.com"
+                , "tms.taoke.alimama.com"
+                , "search8.taobao.com"
+                , "p.alimama.com"
+                , "z.alimama.com"
+                , "t.alimama.com"
+                , "s.click.taobao.com"
+                , "huoban.taobao.com"
+                , "login.taobao.com"
+                , "member1.taobao.com"]
+        },
+        kissy:{
+            io:true,
+            kcharts:true,
+            calendar:true,
+            jssdk:true,
+            alimap:true
+        },
+        modules: decodeURIComponent( window.location.search.substr(1) ), // 通过 url 传入的 modules
+        speci:"tmallbrand"
+    };
+</script>
+</body>
+</html>

@@ -22,13 +22,33 @@
 		var js = document.getElementById( 'tae-js-testbed-js' );
 		data.js = js ? js.value : '';
 
+		// 提取 js 环境版本
+		var ver = document.getElementById( 'tae-js-testbed-ver' );
+		data.ver = ver ? ver.value : 'r3002';
+
+		// 对于 r4000 环境，要从 html 中提取出 modules
+		if ( data.ver == 'r4000' ) {
+			// <cajamodules inlucde="kissy/1.3.0/core,kissy/gallery/kcharts/1.1/index"></cajamodules>
+			var m = data.html.match( /<cajamodules\s+inlucde=['"]([^'"]*)['"]/i );
+			if ( m ) {
+				// 每个 module 都加上 'openjs/' 前缀
+				var modules = m[1].split( ',' );
+				for ( var i in modules ) {
+					modules[i] = 'openjs/' + modules[i].trim();
+				}
+				data.modules = modules.join( ',' );
+			}
+		}
+
 		// 请求 caja 编译
 		var xhr = new XMLHttpRequest();
+		xhr.open( 'POST', 'http://zxn.taobao.com/tbcajaService.htm', true );
+		xhr.setRequestHeader( 'Content-type', 'application/x-www-form-urlencoded' );
 		xhr.onreadystatechange = function( evt ) {
 			if ( xhr.readyState != 4 ) return;
 			if ( xhr.status != 200 ) return;
 
-			// caja 编译完成
+			// caja 编译完成，对得到的结果进行一些清洗
 			var caja = xhr.responseText;
 			caja = caja.substr( caja.indexOf( 'TShop.' ) )
 					.replace( /&#39;/g, '\'' )
@@ -40,11 +60,13 @@
 			// 重新加载 iframe
 			var href = window.location.href;
 			var pos = href.lastIndexOf( '/' );
-			href = href.substr( 0, pos ) + '/bed.html';
+			href = href.substr( 0, pos ) + '/bed.' + data.ver + '.html';
+			if ( data.modules ) {
+				// 通过 url 传入 modules
+				href += '?' + encodeURIComponent( data.modules );
+			}
 			iframe.contentWindow.location = href;
 		};
-		xhr.open( 'POST', 'http://zxn.taobao.com/tbcajaService.htm', true );
-		xhr.setRequestHeader( 'Content-type', 'application/x-www-form-urlencoded' );
 		xhr.send( 'token=TAE-SDK&content=' + encodeURIComponent( data.js ) + '&component=tae_js_testbed' );
 	});
 
@@ -55,14 +77,16 @@
 		var mod = doc.getElementById( 'tae-js-testbed-mod' );
 		mod.innerHTML = data.html;
 
-		// 引入 caja js 内容
+		// 引入 caja 编译后的 js 内容
 		var sc = doc.createElement( 'script' );
 		sc.innerHTML = data.caja;
 		doc.body.appendChild( sc );
 
-		// 引入 setup.js
+		// 引入 setup.js，启动沙箱环境
 		sc = doc.createElement( 'script' );
-		sc.src = 'http://a.tbcdn.cn/apps/??taesite/balcony/core/r3002/caja-setup.js,daogoudian/isv/kissygallery.js';
+		sc.src = data.ver == 'r4000'
+			? 'http://a.tbcdn.cn/apps/taesite/balcony/core/r4000/base/setup.js'
+			: 'http://a.tbcdn.cn/apps/??taesite/balcony/core/r3002/caja-setup.js,daogoudian/isv/kissygallery.js';
 		doc.body.appendChild( sc );
 	});
 })();

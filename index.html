@@ -2,15 +2,21 @@
 <head>
 <meta charset="utf-8">
 <title>TAE JS 测试工具</title>
+<style>
+td {
+	font-size: 12px;
+	vertical-align: middle;
+}
+</style>
 </head>
 <body>
 
 <table style="width:100%; height:100%;">
 <tr>
-	<td colspan="3" style="font-size:12px;">
-		使用本工具之前，需要先下载安装 Chrome 插件。
+	<td colspan="3">
+		本工具仅适用于 Google Chrome 浏览器，使用之前，需要先下载安装 Chrome 插件。
 		<br>
-		安装方法：先 <a href="tae-js-testbed.crx">下载 tae-js-testbed.crx 文件</a> 到本地，再打开 Chrome 浏览器的“扩展程序”管理页面，然后把文件拖拽到这个页面里。
+		安装方法：先 <a href="tae-js-testbed.crx">下载 tae-js-testbed.crx 文件</a> 到本地，再打开 Chrome 浏览器的“扩展程序”管理页面，然后把文件拖拽到那个页面里。
 	</td>
 </tr>
 <tr>
@@ -27,12 +33,21 @@
 <div class="my-div">
 	hello, TAE JS !
 </div>
+<!-- r4000 版本的 js 环境需要配置 cajamodules -->
+<cajamodules inlucde="kissy/1.3.0/core,kissy/gallery/kcharts/1.1/index"></cajamodules>
 </textarea>
 			</td>
 		</tr>
 		<tr>
-			<td>
-				<button id="tae-js-testbed-run" style="float:right"><nobr>运行&gt;&gt;</nobr></button>
+			<td style="line-height:28px;">
+				<button id="tae-js-testbed-run" style="float:right">运行&gt;&gt;</button>
+				<div style="float:right; margin-right:30px;">
+					JS环境版本
+					<select id="tae-js-testbed-ver">
+						<option value="r3002" selected>r3002</option>
+						<option value="r4000">r4000</option>
+					</select>
+				</div>
 				JavaScript:
 			</td>
 		</tr>
@@ -41,7 +56,7 @@
 				<textarea id="tae-js-testbed-js" style="width:100%; height:100%;">
 var div = KISSY.all('.my-div');
 console.log('my-div:', div);
-var text = KISSY.DOM.text(div);
+var text = div.text();
 console.log('text:', text);
 </textarea>
 			</td>
