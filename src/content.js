@@ -12,7 +12,7 @@
 	// 传值对象
 	var data = {};
 
-	// 点击了按钮
+	// 点击了“运行”按钮
 	btn.addEventListener( 'click', function( evt ) {
 		// 提取 html 内容
 		var html = document.getElementById( 'tae-js-testbed-html' );
