@@ -1,0 +1,37 @@
+{
+	"name"              : "TAE JS 测试工具",
+	"version"           : "0.1",
+	"manifest_version"  : 2,
+	"description"       : "用于针对 TAE 的 js 环境制作测试用例。",
+
+	"permissions": [
+		"tabs",
+		"http://zxn.taobao.com/"
+	],
+
+	"background": {
+		"persistent": false,
+		"scripts": [ "background.js" ]
+	},
+
+    "content_scripts": [{
+        "matches"    : [ "http://maq128.github.io/tae-js-testbed/*", "http://localhost:*/*" ],
+        "run_at"     : "document_end",
+        "js"         : [ "content.js" ],
+        "all_frames" : true
+    }],
+
+	"icons": {
+		"16" : "icon16.png",
+		"48" : "icon48.png",
+		"128": "icon128.png"
+	},
+
+	"browser_action": {
+		"default_icon": {
+			"19": "icon48.png",
+			"38": "icon48.png"
+		},
+		"default_title": "TAE JS 测试工具"
+	}
+}

@@ -1,0 +1,69 @@
+<html>
+<head>
+<meta charset="utf-8">
+<title>TAE JS 测试工具</title>
+</head>
+<body>
+
+<table style="width:100%; height:100%;">
+<tr>
+	<td colspan="3" style="font-size:12px;">
+		使用本工具之前，需要先下载安装 Chrome 插件。
+		<br>
+		安装方法：先 <a href="tae-js-testbed.crx">下载 tae-js-testbed.crx 文件</a> 到本地，再打开 Chrome 浏览器的“扩展程序”管理页面，然后把文件拖拽到这个页面里。
+	</td>
+</tr>
+<tr>
+	<td style="width:50%;">
+		<table style="width:100%; height:100%;">
+		<tr>
+			<td>
+				HTML:
+			</td>
+		</tr>
+		<tr>
+			<td style="height:40%;">
+				<textarea id="tae-js-testbed-html" style="width:100%; height:100%;">
+<div class="my-div">
+	hello, TAE JS !
+</div>
+</textarea>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<button id="tae-js-testbed-run" style="float:right"><nobr>运行&gt;&gt;</nobr></button>
+				JavaScript:
+			</td>
+		</tr>
+		<tr>
+			<td style="height:60%;">
+				<textarea id="tae-js-testbed-js" style="width:100%; height:100%;">
+var div = KISSY.all('.my-div');
+console.log('my-div:', div);
+var text = KISSY.DOM.text(div);
+console.log('text:', text);
+</textarea>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td style="width:50%; height:100%;">
+		<table style="width:100%; height:100%;">
+		<tr>
+			<td>
+				运行结果:
+			</td>
+		</tr>
+		<tr>
+			<td style="height:100%;">
+				<iframe id="tae-js-testbed-iframe" style="width:100%; height:100%;"></iframe>
+			</td>
+		</tr>
+		</table>
+	</td>
+</tr>
+</table>
+
+</body>
+</html>
