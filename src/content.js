@@ -1,9 +1,12 @@
 // http://developer.chrome.com/extensions/devguide.html
-
 (function() {
 	// 确认“运行”按钮
 	var btn = document.getElementById( 'tae-js-testbed-run' );
 	if ( ! btn ) return;
+
+	// 埋下插件版本标记
+	var m = chrome.runtime.getManifest();
+	btn.setAttribute( 'data-ext-version', m.version );
 
 	// 确认“运行结果”的 irame
 	var iframe = document.getElementById( 'tae-js-testbed-iframe' );

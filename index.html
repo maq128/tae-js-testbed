@@ -8,6 +8,35 @@ td {
 	vertical-align: middle;
 }
 </style>
+<script language="JavaScript">
+window.addEventListener( 'load', function( evt ) {
+	var requiredVer = '0.3';
+	var checkExtVersion = function( ver ) {
+		var a_req = requiredVer.split( '.' );
+		var a_cur = ver.split( '.' );
+		var i = 0;
+		while ( i < a_req.length && i < a_cur.length ) {
+			var v_req = parseInt( a_req[i] );
+			var v_cur = parseInt( a_cur[i] );
+			if ( v_cur < v_req ) return false;
+			i ++;
+		}
+		return true;
+	};
+
+	var btnRun = document.getElementById( 'tae-js-testbed-run' );
+	btnRun.addEventListener( 'click', function( evt ) {
+		var ver = btnRun.getAttribute( 'data-ext-version' );
+		if ( ver == null ) {
+			alert( '请先安装最新版本的 tae-js-testbed.crx 插件。' );
+			return;
+		}
+
+		if ( checkExtVersion( ver ) ) return;
+		alert( '您现在安装的是 tae-js-testbed.crx 插件的 ' + ver + ' 版本。\r\n建议您重新安装最新的 ' + requiredVer + ' 版本，以确保功能正常。' );
+	});
+});
+</script>
 </head>
 <body>
 
@@ -41,7 +70,7 @@ td {
 </div>
 
 <!-- r4000 版本的 js 环境需要配置 cajamodules -->
-<cajamodules inlucde="kissy/1.3.0/core,kissy/gallery/kcharts/1.1/index"></cajamodules>
+<cajamodules inlucde="kissy/1.3.0/core,kissy/gallery/kcharts/1.1/index" />
 </textarea>
 			</td>
 		</tr>
