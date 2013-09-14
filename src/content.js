@@ -1,11 +1,11 @@
 // http://developer.chrome.com/extensions/devguide.html
 
 (function() {
-	// 确认存在按钮
+	// 确认“运行”按钮
 	var btn = document.getElementById( 'tae-js-testbed-run' );
 	if ( ! btn ) return;
 
-	// 确认存在 irame
+	// 确认“运行结果”的 irame
 	var iframe = document.getElementById( 'tae-js-testbed-iframe' );
 	if ( ! iframe ) return;
 
@@ -82,7 +82,7 @@
 		sc.innerHTML = data.caja;
 		doc.body.appendChild( sc );
 
-		// 引入 setup.js，启动沙箱环境
+		// 启动沙箱环境
 		sc = doc.createElement( 'script' );
 		sc.src = data.ver == 'r4000'
 			? 'http://a.tbcdn.cn/apps/taesite/balcony/core/r4000/base/setup.js'
