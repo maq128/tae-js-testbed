@@ -62,6 +62,7 @@
 			data.caja = caja;
 
 			// 重新加载 iframe
+			// FIXME: 似乎这里的“重新加载”方式并不能彻底清空上一次加载留下的痕迹……？
 			var href = window.location.href;
 			var pos = href.lastIndexOf( '/' );
 			href = href.substr( 0, pos ) + '/bed.' + data.ver + '.html';
