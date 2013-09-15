@@ -14,7 +14,7 @@ td {
 <script language="JavaScript">
 window.addEventListener( 'load', function( evt ) {
 	// 最新的插件版本号
-	var requiredVer = '0.3';
+	var requiredVer = '0.4';
 
 	// 比较版本号
 	var checkExtVersion = function( ver ) {
@@ -25,6 +25,7 @@ window.addEventListener( 'load', function( evt ) {
 			var v_req = parseInt( a_req[i] );
 			var v_cur = parseInt( a_cur[i] );
 			if ( v_cur < v_req ) return false;
+			if ( v_cur > v_req ) break;
 			i ++;
 		}
 		return true;
