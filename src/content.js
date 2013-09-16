@@ -15,9 +15,7 @@
 
 	// 传值对象
 	var data = {};
-
-	// 点击了“运行”按钮
-	btn.addEventListener( 'click', function( evt ) {
+	var retrieveData = function() {
 		// 提取 html 内容
 		var html = document.getElementById( 'tae-js-testbed-html' );
 		data.html = html ? html.value : '';
@@ -44,14 +42,11 @@
 				data.modules = modules.join( ',' );
 			}
 		}
+	};
 
-		// “提交测试用例”链接
-		var mailto = document.getElementById( 'tae-js-testbed-mailto' );
-		if ( mailto ) {
-			var subject = '提交 TAE JS 测试用例';
-			var body = '【问题描述】\r\n\r\n\r\n\r\n【HTML】\r\n' + data.html + '\r\n\r\n【JavaScript】\r\n' + data.js + '\r\n';
-			mailto.href = 'mailto:shiba@taobao.com?subject=' + encodeURIComponent_gbk( subject ) + '&body=' + encodeURIComponent_gbk( body );
-		}
+	// 点击了“运行”按钮
+	btn.addEventListener( 'click', function( evt ) {
+		retrieveData();
 
 		// 请求 caja 编译
 		var xhr = new XMLHttpRequest();
@@ -111,6 +106,18 @@
 			? 'http://a.tbcdn.cn/apps/taesite/balcony/core/r4000/base/setup.js'
 			: 'http://a.tbcdn.cn/apps/??taesite/balcony/core/r3002/caja-setup.js,daogoudian/isv/kissygallery.js';
 		doc.body.appendChild( sc );
+	});
+
+	// “提交测试用例”按钮
+	var mailto = document.getElementById( 'tae-js-testbed-mailto' );
+	mailto.addEventListener( 'click', function( evt ) {
+		retrieveData();
+
+		var subject = '提交 TAE JS 测试用例';
+		var body = '【问题描述】\r\n\r\n\r\n\r\n【HTML】\r\n' + data.html + '\r\n\r\n【JavaScript】\r\n' + data.js + '\r\n\r\n【JS环境版本】\r\n' + data.ver + '\r\n';
+		var url = 'mailto:shiba@taobao.com?subject=' + encodeURIComponent_gbk( subject ) + '&body=' + encodeURIComponent_gbk( body );
+		var win = window.open( url );
+		win.close();
 	});
 })();
 
