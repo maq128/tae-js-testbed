@@ -58,7 +58,7 @@
 
 			// 检查编译结果是否报错
 			var prefix = caja.substr( 0, 9 );
-			if ( prefix != '\r\ncode:0-' ) {
+			if ( prefix == '\r\ncode:1-' ) {
 				alert( caja.substr( 9 ) );
 				return;
 			}
