@@ -45,6 +45,14 @@
 			}
 		}
 
+		// “提交测试用例”链接
+		var mailto = document.getElementById( 'tae-js-testbed-mailto' );
+		if ( mailto ) {
+			var subject = '提交 TAE JS 测试用例';
+			var body = '【问题描述】\r\n\r\n\r\n\r\n【HTML】\r\n' + data.html + '\r\n\r\n【JavaScript】\r\n' + data.js + '\r\n';
+			mailto.href = 'mailto:shiba@taobao.com?subject=' + encodeURIComponent_gbk( subject ) + '&body=' + encodeURIComponent_gbk( body );
+		}
+
 		// 请求 caja 编译
 		var xhr = new XMLHttpRequest();
 		xhr.open( 'POST', 'http://zxn.taobao.com/tbcajaService.htm', true );
