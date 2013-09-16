@@ -14,7 +14,7 @@ td {
 <script language="JavaScript">
 window.addEventListener( 'load', function( evt ) {
 	// 最新的插件版本号
-	var requiredVer = '0.5.3';
+	var requiredVer = '0.5.4';
 
 	// 比较版本号
 	var checkExtVersion = function( ver ) {
@@ -52,7 +52,7 @@ window.addEventListener( 'load', function( evt ) {
 		var snippet = list[i];
 		var title = snippet.getAttribute( 'data-title' ).trim();
 		var targetJs = snippet.getAttribute( 'data-target-js' );
-		if ( targetJs ) title += ' - ' + targetJs;
+		if ( targetJs ) title += '（' + targetJs + '）';
 		var html = snippet.getElementsByClassName( 'html' )[0].innerHTML.trim();
 		var js = snippet.getElementsByClassName( 'js' )[0].textContent.trim();
 		snippets[ title ] = {
@@ -201,7 +201,7 @@ console.log('text:', text);
 	</script>
 </div>
 
-<div class="snippet" data-title="HTML编辑器" data-target-js="r3002">
+<div class="snippet" data-title="HTML编辑器">
 	<script type="text/plain" class="html">
 <div class="kg_editorContainer"
   data-config="{&quot;width&quot;:&quot;733px&quot;, &quot;height&quot;:&quot;200px&quot;}">
