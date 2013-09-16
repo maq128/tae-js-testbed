@@ -14,7 +14,7 @@ td {
 <script language="JavaScript">
 window.addEventListener( 'load', function( evt ) {
 	// 最新的插件版本号
-	var requiredVer = '0.4';
+	var requiredVer = '0.5';
 
 	// 比较版本号
 	var checkExtVersion = function( ver ) {
@@ -213,19 +213,19 @@ console.log('text:', text);
 	<script type="text/plain" class="js">
 	</script>
 </div>
-<!--
+
 <div class="snippet" data-title="Calendar" data-target-js="r4000">
 	<script type="text/plain" class="html">
 <input type="text" class="my-calendar" />
 <cajamodules inlucde="kissy/1.3.0/core,kissy/1.3.0/calendar" />
 	</script>
 	<script type="text/plain" class="js">
-var cal = KISSY.Calendar('.my-calendar'，{
-  popup:true,
-  maxDate:new Date() 
+var cal = KISSY.Calendar( '.my-calendar', {
+  popup: true,
+  maxDate: new Date()
 });
-cal.on('select',function(e){
-  var date = new Date(e.date);
+cal.on( 'select',function( e ) {
+  var date = new Date( e.date );
   console.log(date);
 })
 	</script>
@@ -261,7 +261,6 @@ var linechart = KISSY.KCharts.LineChart({
 });
 </script>
 </div>
--->
 
 </body>
 </html>
