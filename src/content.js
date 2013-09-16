@@ -103,7 +103,7 @@
 		// 启动沙箱环境
 		sc = doc.createElement( 'script' );
 		sc.src = data.ver == 'r4000'
-			? 'http://a.tbcdn.cn/apps/taesite/balcony/core/r4000/base/setup.js'
+			? 'http://a.tbcdn.cn/apps/??taesite/balcony/core/r4000/base/setup.js,daogoudian/isv/kissygallery.js'
 			: 'http://a.tbcdn.cn/apps/??taesite/balcony/core/r3002/caja-setup.js,daogoudian/isv/kissygallery.js';
 		doc.body.appendChild( sc );
 	});
