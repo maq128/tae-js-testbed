@@ -13,6 +13,22 @@
 	var iframe = document.getElementById( 'tae-js-testbed-iframe' );
 	if ( ! iframe ) return;
 
+	// 如果 url 中已经携带了数据，则填入网页
+	var populateData = function() {
+		var params = window.location.search.substr( 1 ).split( '&' );
+		for ( var i = 0; i < params.length; i ++ ) {
+			var kv = params[i].split( '=', 2 );
+			if ( kv[0] == 'html' ) {
+				document.getElementById( 'tae-js-testbed-html' ).value = decodeURIComponent( kv[1] );
+			} else if ( kv[0] == 'js' ) {
+				document.getElementById( 'tae-js-testbed-js' ).value = decodeURIComponent( kv[1] );
+			} else if ( kv[0] == 'ver' ) {
+				document.getElementById( 'tae-js-testbed-ver' ).value = kv[1];
+			}
+		}
+	};
+	populateData();
+
 	// 传值对象
 	var data = {};
 	var retrieveData = function() {
@@ -106,6 +122,30 @@
 			? 'http://a.tbcdn.cn/apps/??taesite/balcony/core/r4000/base/setup.js,daogoudian/isv/kissygallery.js'
 			: 'http://a.tbcdn.cn/apps/??taesite/balcony/core/r3002/caja-setup.js,daogoudian/isv/kissygallery.js';
 		doc.body.appendChild( sc );
+	});
+
+	// “复制链接到剪贴板”按钮
+	var copylink = document.getElementById( 'tae-js-testbed-copylink' );
+	copylink.addEventListener( 'click', function( evt ) {
+		retrieveData();
+
+		var url = window.location.origin + window.location.pathname;
+		url += '?html=' + encodeURIComponent( data.html ) + '&js=' + encodeURIComponent( data.js ) + '&ver=' + data.ver;
+
+		// 发送给 background.js 操作剪贴板
+		chrome.runtime.sendMessage( undefined, { action: 'copy', text: url }, function( resp ) {
+			var msg = [
+				'链接已经复制到剪贴板，url 长度为 ' + url.length + ' 个字符。',
+				'',
+				'【一些常见浏览器支持的 url 长度限制】',
+				'   Internet Explorer - 2083',
+				'   Firefox - 65,536',
+				'   chrome - 8182',
+				'   Safari - 80,000',
+				'   Opera - 190,000'
+			].join('\r\n');;
+			alert( msg );
+		});
 	});
 
 	// “提交测试用例”按钮
