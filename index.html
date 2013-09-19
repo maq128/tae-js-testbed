@@ -149,7 +149,7 @@ console.log('text:', text);
 			<td style="line-height:28px;">
 				<div style="float:right">
 					<button id="tae-js-testbed-copylink" title="通过该链接可以直接访问当前的测试用例">复制链接到剪贴板</button>
-					<button id="tae-js-testbed-mailto" title="邮件提交测试用例给淘宝开放JS官方技术支持">提交测试用例</button>
+					<button id="tae-js-testbed-mailto" title="邮件提交测试用例给淘宝开放JS官方技术支持">邮件提交测试用例</button>
 				</div>
 				运行结果:
 			</td>
@@ -193,6 +193,56 @@ var div = KISSY.all('.my-div');
 console.log('my-div:', div);
 var text = div.text();
 console.log('text:', text);
+	</script>
+</div>
+
+<div class="snippet" data-title="KISSY.io - json">
+	<script type="text/plain" class="html">
+<div class="result"></div>
+
+<cajamodules inlucde="kissy/1.3.0/core" /><!-- r4000 必需 -->
+	</script>
+	<script type="text/plain" class="js">
+/*
+  受 url 白名单限制，本段代码在当前域名下无法实际运行，仅供参考。
+*/
+KISSY.io({
+  dataType: 'json',
+  url: '/test.json',
+
+  success: function( data, textStatus, xhr ) {
+    KISSY.all('.result').text( KISSY.JSON.stringify( data ) );
+  }
+});
+	</script>
+</div>
+
+<div class="snippet" data-title="KISSY.io - jsonp">
+	<script type="text/plain" class="html">
+<div class="result"></div>
+
+<cajamodules inlucde="kissy/1.3.0/core" /><!-- r4000 必需 -->
+	</script>
+	<script type="text/plain" class="js">
+/*
+  url 白名单限定以下网址可以访问：
+    *.imagine.taotaosou.net
+    *.taobao.net
+    *.taobaoapps.net
+    *.taegrid.taobao.com
+    *.uz.taobao.com
+*/
+KISSY.io({
+  dataType: 'jsonp',
+  url: 'http://admin.uz.taobao.com/footBarAction.do',
+  data: {
+    method: 'do_search'
+  },
+
+  success: function( data, textStatus, xhr ) {
+    KISSY.all('.result').text( KISSY.JSON.stringify( data ) );
+  }
+});
 	</script>
 </div>
 
