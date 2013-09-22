@@ -136,11 +136,11 @@
 		chrome.runtime.sendMessage( undefined, { action: 'copy', text: url }, function( resp ) {
 			var msg = [
 				'链接已经复制到剪贴板，url 长度为 ' + url.length + ' 个字符。',
+				'Chrome 浏览器支持的最大长度为 8182 个字符。',
 				'',
-				'【一些常见浏览器支持的 url 长度限制】',
+				'【附：其它常见浏览器支持的 url 长度限制】',
 				'   Internet Explorer - 2083',
 				'   Firefox - 65,536',
-				'   chrome - 8182',
 				'   Safari - 80,000',
 				'   Opera - 190,000'
 			].join('\r\n');;
